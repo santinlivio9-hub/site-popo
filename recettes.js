@@ -14,10 +14,15 @@
 
    FORMAT D'UN INGRÉDIENT : [quantité, unité, nom]
      quantité    nombre, ou null si « au goût »
-     unité       'g', 'ml', 'c. à s.', 'c. à c.', 'pincée', ou '' (à l'unité)
+     unité       'g', 'ml', 'c. à s.', 'c. à c.', 'pincée', 'sachet', ou '' (à l'unité)
      nom         texte, ou ['singulier', 'pluriel'] pour les ingrédients
                  comptés à l'unité (le site choisit selon la quantité)
      Une ligne texte commençant par '#' crée un sous-titre (ex. '# Sauce').
+
+   ÉTAPES ET MINUTEURS
+     Une durée écrite dans une étape (« 20 minutes », « 8 à 10 minutes »,
+     « 1 h 30 », « 6 heures », « 30 secondes ») ajoute automatiquement
+     un bouton minuteur à côté de l'étape (la plus petite valeur est retenue).
    ===================================================================== */
 window.POPO_RECETTES = {
 
@@ -152,6 +157,30 @@ window.POPO_RECETTES = {
       tip: "Avec un œuf au plat posé dessus, il devient un croque-madame."
     },
     {
+      id: 'andouillette-moutarde', cat: 'plat', level: 1, serves: 2, prep: 10, cook: 20,
+      title: 'Andouillette de Troyes, sauce moutarde',
+      blurb: "La spécialité de notre QG, nappée d'une sauce à l'ancienne.",
+      ingredients: [
+        [2, '', ['andouillette de Troyes', 'andouillettes de Troyes']],
+        [1, '', ['échalote', 'échalotes']],
+        [100, 'ml', 'vin blanc sec'],
+        [100, 'ml', 'crème fraîche'],
+        [1, 'c. à s.', "moutarde à l'ancienne"],
+        [15, 'g', 'beurre'],
+        [null, '', 'sel, poivre'],
+        [null, '', 'pommes de terre vapeur ou frites']
+      ],
+      steps: [
+        "Entailler légèrement la peau des andouillettes en quelques endroits pour qu'elles n'éclatent pas à la cuisson.",
+        "Les cuire dans le beurre à feu moyen pendant 15 minutes environ, en les retournant régulièrement pour bien les dorer. Réserver au chaud.",
+        "Dans la même poêle, faire revenir l'échalote ciselée 2 minutes.",
+        "Déglacer avec le vin blanc en grattant les sucs, puis laisser réduire de moitié.",
+        "Ajouter la crème et la moutarde, laisser épaissir 2 minutes à feu doux, puis poivrer.",
+        "Napper les andouillettes de sauce et servir avec les pommes de terre."
+      ],
+      tip: "Parfait pour le « défi andouillette » de la roue des dates : la sauce moutarde adoucit le goût, idéal pour une première fois."
+    },
+    {
       id: 'carbonara', cat: 'plat', level: 1, serves: 2, prep: 10, cook: 12,
       title: 'Spaghetti carbonara',
       blurb: "La vraie, sans crème : œufs, fromage, poivre et c'est tout.",
@@ -171,6 +200,31 @@ window.POPO_RECETTES = {
         "Servir aussitôt avec un peu de fromage et de poivre."
       ],
       tip: "Le secret, c'est la poêle hors du feu : trop chaude, les œufs font des grumeaux."
+    },
+    {
+      id: 'welsh', cat: 'plat', level: 2, serves: 2, prep: 10, cook: 15,
+      title: 'Welsh du Nord',
+      blurb: "Cheddar fondu à la bière, jambon et pain grillé : la spécialité lilloise.",
+      ingredients: [
+        [2, '', ['tranche épaisse de pain de campagne', 'tranches épaisses de pain de campagne']],
+        [2, '', ['tranche de jambon blanc', 'tranches de jambon blanc']],
+        [250, 'g', 'cheddar affiné'],
+        [150, 'ml', 'bière blonde ou ambrée'],
+        [1, 'c. à s.', 'moutarde'],
+        [2, '', ['œuf', 'œufs']],
+        [null, '', 'poivre, paprika (facultatif)'],
+        [null, '', 'frites pour servir']
+      ],
+      steps: [
+        "Préchauffer le four à 200 °C.",
+        "Faire griller légèrement le pain, puis poser chaque tranche dans un plat à gratin individuel.",
+        "Arroser le pain d'un petit trait de bière, le tartiner de moutarde et le couvrir d'une tranche de jambon.",
+        "Dans une casserole à feu doux, faire fondre le cheddar coupé en dés avec le reste de la bière, en remuant sans arrêt jusqu'à obtenir une sauce lisse. Poivrer.",
+        "Napper généreusement le pain de cheddar fondu.",
+        "Enfourner 10 à 12 minutes, jusqu'à ce que ce soit doré et bouillonnant.",
+        "Pendant ce temps, cuire les œufs au plat et en poser un sur chaque welsh à la sortie du four."
+      ],
+      tip: "La répétition idéale avant l'escapade à Lille. Une bière ambrée donne plus de goût que la blonde."
     },
     {
       id: 'risotto-champignons', cat: 'plat', level: 2, serves: 2, prep: 15, cook: 25,
@@ -453,6 +507,30 @@ window.POPO_RECETTES = {
       tip: "Un carré de chocolat enfoncé au centre avant la cuisson, et c'est un cœur coulant."
     },
     {
+      id: 'cookies', cat: 'dessert', level: 1, serves: 10, prep: 15, cook: 12,
+      title: 'Cookies aux pépites de chocolat',
+      blurb: "Bords croustillants, cœur moelleux : une fournée d'une dizaine de cookies.",
+      ingredients: [
+        [125, 'g', 'beurre mou'],
+        [100, 'g', 'sucre roux'],
+        [50, 'g', 'sucre en poudre'],
+        [1, '', ['œuf', 'œufs']],
+        [200, 'g', 'farine'],
+        [0.5, 'c. à c.', 'levure chimique'],
+        [1, 'pincée', 'fleur de sel'],
+        [150, 'g', 'pépites ou morceaux de chocolat']
+      ],
+      steps: [
+        "Préchauffer le four à 180 °C et couvrir une plaque de papier cuisson.",
+        "Mélanger le beurre mou avec les deux sucres jusqu'à obtenir une texture crémeuse.",
+        "Ajouter l'œuf, puis la farine, la levure et la fleur de sel, sans trop travailler la pâte.",
+        "Incorporer les pépites de chocolat.",
+        "Former des boules de la taille d'une noix et bien les espacer sur la plaque : elles s'étalent à la cuisson.",
+        "Cuire 10 à 12 minutes : les bords doivent être dorés et le centre encore mou. Laisser durcir 10 minutes sur la plaque."
+      ],
+      tip: "Une demi-heure de pâte au réfrigérateur avant la cuisson donne des cookies plus épais et plus moelleux."
+    },
+    {
       id: 'fondant-coeur-coulant', cat: 'dessert', level: 2, serves: 2, prep: 15, cook: 10,
       title: 'Fondant au cœur coulant',
       blurb: "Le dessert de restaurant, sans le restaurant.",
@@ -585,6 +663,30 @@ window.POPO_RECETTES = {
         "Servir en pile avec du sirop d'érable et des fruits."
       ],
       tip: "Trop fouetter la pâte rend les pancakes plats : on mélange, on ne bat pas."
+    },
+    {
+      id: 'gaufres', cat: 'brunch', level: 1, serves: 4, prep: 10, cook: 20, rest: 30,
+      title: 'Gaufres croustillantes',
+      blurb: "Croustillantes dehors, moelleuses dedans, pour le goûter du dimanche.",
+      ingredients: [
+        [250, 'g', 'farine'],
+        [2, '', ['œuf', 'œufs']],
+        [400, 'ml', 'lait'],
+        [80, 'g', 'beurre fondu'],
+        [30, 'g', 'sucre'],
+        [1, 'sachet', 'levure chimique'],
+        [1, 'pincée', 'sel'],
+        [null, '', 'sucre glace, chantilly ou chocolat fondu']
+      ],
+      steps: [
+        "Mélanger la farine, le sucre, la levure et le sel dans un saladier.",
+        "Ajouter les œufs, puis verser le lait petit à petit en fouettant pour éviter les grumeaux.",
+        "Incorporer le beurre fondu et laisser reposer la pâte 30 minutes.",
+        "Faire chauffer le gaufrier et le graisser légèrement au pinceau.",
+        "Verser une petite louche de pâte, refermer et cuire 3 à 4 minutes, jusqu'à ce que la gaufre soit bien dorée.",
+        "Servir aussitôt avec du sucre glace, de la chantilly ou du chocolat fondu."
+      ],
+      tip: "Pour des gaufres encore plus légères, monter les blancs en neige et les incorporer délicatement à la fin."
     },
     {
       id: 'crepes', cat: 'brunch', level: 1, serves: 4, prep: 10, cook: 20, rest: 60,

@@ -65,7 +65,6 @@
       <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
       <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
       <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3z"/></symbol>
-      <!-- Ajouts : roue, recettes, easter eggs -->
       <symbol id="i-wheel" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><path d="M12 3v7M12 14v7M3 12h7M14 12h7M5.6 5.6l5 5M13.4 13.4l5 5M18.4 5.6l-5 5M10.6 13.4l-5 5"/></symbol>
       <symbol id="i-chef" viewBox="0 0 24 24"><path d="M6.5 13.5A3.5 3.5 0 017 6.6a5 5 0 0110 0 3.5 3.5 0 01.5 6.9V18h-11z"/><path d="M6.5 21h11M10 18v-3M14 18v-3"/></symbol>
       <symbol id="i-dice" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1.3" fill="currentColor" stroke="none"/><circle cx="15" cy="9" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="9" cy="15" r="1.3" fill="currentColor" stroke="none"/><circle cx="15" cy="15" r="1.3" fill="currentColor" stroke="none"/></symbol>
@@ -75,6 +74,15 @@
       <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></symbol>
       <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 010 7M19 6a8.5 8.5 0 010 12"/></symbol>
       <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M17 9.5l5 5M22 9.5l-5 5"/></symbol>
+      <!-- Ajouts : lecteur, recettes, navigation -->
+      <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M3 7h3.5c2.5 0 4 1.5 5.5 5s3 5 5.5 5H21M3 17h3.5c1.2 0 2.2-.4 3-1.1M14 8.1c.8-.7 1.8-1.1 3-1.1H21M18 4l3 3-3 3M18 14l3 3-3 3"/></symbol>
+      <symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 11V9a3 3 0 013-3h12l-3-3M20 13v2a3 3 0 01-3 3H5l3 3"/></symbol>
+      <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.2 10.4a1.5 1.5 0 001.5 1.1h8.6a1.5 1.5 0 001.4-1l2-6.5H6.3"/><circle cx="9.5" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/></symbol>
+      <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.5 1.5M9.5 3h5M12 3v2.5"/></symbol>
+      <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9.5 7V4.5h5V7M6.5 7l1 13h9l1-13M10 11v6M14 11v6"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 00-1-1H5a1 1 0 00-1 1v10a1 1 0 001 1h3"/></symbol>
+      <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
     </defs>
   </svg>
 
@@ -198,7 +206,8 @@
           </button>
         </div>
 
-        <p class="next-date reveal" id="next-date" style="--d:9" hidden></p>
+        <!-- Tableau de bord : mois-iversaire, prochaine étape, série du moment, carnet (script.js) -->
+        <div class="home-dash" id="home-dash" aria-label="En ce moment"></div>
       </div>
     </section>
 
@@ -232,15 +241,19 @@
 
     <!-- ================================================================
          4. CARTE DE NOS AVENTURES (SVG vectoriel, 100 % hors ligne)
+         Les pins et les routes sont générés par script.js depuis PLACES
+         (latitude / longitude réelles projetées sur la carte).
          ================================================================ -->
     <section class="panel" id="panel-carte" role="tabpanel" aria-labelledby="tab-carte" data-panel="carte" hidden>
       <div class="section-head">
         <h2>Carte de nos aventures</h2>
-        <p>Survole ou clique sur un point pour ouvrir ses détails.</p>
+        <p>Survole ou clique sur un point pour ouvrir ses détails. Toutes les routes partent de Troyes.</p>
       </div>
 
+      <div class="map-stats" id="map-stats" aria-live="polite"><!-- généré par script.js --></div>
+
       <div class="map-wrap" id="map-wrap">
-        <svg class="map" id="map" viewBox="0 0 600 600" role="group" aria-label="Carte stylisée de la France avec Troyes, Paris et Lyon">
+        <svg class="map" id="map" viewBox="0 0 600 600" role="group" aria-label="Carte stylisée de la France avec nos lieux : Troyes, Paris, Lyon et Lille">
           <defs>
             <pattern id="map-grid" width="30" height="30" patternUnits="userSpaceOnUse">
               <path class="map-grid-line" d="M30 0H0V30" fill="none" stroke-width="1"/>
@@ -251,19 +264,19 @@
           <rect class="map-sea" x="0" y="0" width="600" height="600" rx="22"/>
           <rect x="0" y="0" width="600" height="600" rx="22" fill="url(#map-grid)"/>
 
-          <!-- Noms de mers (décor) -->
+          <!-- Noms de mers et pays voisins (décor) -->
           <text class="map-sea-label" x="28" y="400" transform="rotate(-14 28 400)">Océan Atlantique</text>
           <text class="map-sea-label" x="170" y="40">Manche</text>
           <text class="map-sea-label" x="372" y="548">Méditerranée</text>
+          <text class="map-country-label" x="420" y="48" text-anchor="middle">Belgique</text>
 
           <!-- France métropolitaine (silhouette stylisée) -->
           <path class="map-land" d="M296,15 L328,35 L340,55 L360,58 L392,70 L400,93 L432,104 L448,110 L484,128 L528,133 L512,157 L496,191 L502,217 L480,226 L476,249 L444,284 L444,296 L472,307 L476,319 L484,342 L472,371 L480,400 L500,436 L491,441 L480,449 L437,475 L415,464 L380,458 L356,449 L320,470 L324,513 L280,510 L256,497 L228,491 L188,488 L140,477 L129,459 L138,453 L144,394 L152,385 L156,333 L154,298 L128,263 L112,231 L76,217 L64,202 L32,201 L12,188 L20,168 L10,162 L40,150 L64,145 L80,145 L120,153 L140,156 L136,133 L124,93 L136,96 L150,93 L152,113 L190,116 L204,104 L244,79 L254,72 L262,64 L264,33 L263,25 L274,20 Z"/>
           <!-- Corse -->
           <path class="map-land" d="M574,482 L580,500 L582,520 L578,540 L572,556 L562,572 L552,572 L546,556 L544,540 L548,524 L544,510 L552,498 L566,492 Z"/>
 
-          <!-- Routes (Troyes → Paris, Troyes → Lyon) -->
-          <path class="map-route" d="M363,174 Q330,140 294,141"/>
-          <path class="map-route" d="M363,174 Q392,250 393,321"/>
+          <!-- Routes depuis Troyes (générées par script.js) -->
+          <g id="map-routes" aria-hidden="true"></g>
 
           <!-- Rose des vents -->
           <g class="map-compass" transform="translate(548 56)" aria-hidden="true">
@@ -272,35 +285,21 @@
             <text y="-26" text-anchor="middle">N</text>
           </g>
 
-          <!-- Points interactifs -->
-          <g class="map-pin pin-main" data-place="troyes" transform="translate(363 174)" role="button" tabindex="0" aria-label="Troyes, notre QG : ouvrir les détails">
-            <circle class="pin-pulse" r="9"/>
-            <circle class="pin-pulse p2" r="9"/>
-            <circle class="pin-dot" r="8"/>
-            <text class="pin-label" x="15" y="5">Troyes</text>
-            <circle class="pin-hit" r="22"/>
-          </g>
-          <g class="map-pin" data-place="paris" transform="translate(294 141)" role="button" tabindex="0" aria-label="Paris, escapade du 28 octobre : ouvrir les détails">
-            <circle class="pin-pulse" r="7"/>
-            <circle class="pin-pulse p2" r="7"/>
-            <circle class="pin-dot" r="6"/>
-            <text class="pin-label" x="-12" y="-9" text-anchor="end">Paris</text>
-            <circle class="pin-hit" r="20"/>
-          </g>
-          <g class="map-pin" data-place="lyon" transform="translate(393 321)" role="button" tabindex="0" aria-label="Lyon, week-end de novembre : ouvrir les détails">
-            <circle class="pin-pulse" r="7"/>
-            <circle class="pin-pulse p2" r="7"/>
-            <circle class="pin-dot" r="6"/>
-            <text class="pin-label" x="13" y="5">Lyon</text>
-            <circle class="pin-hit" r="20"/>
-          </g>
+          <!-- Points interactifs (générés par script.js) -->
+          <g id="map-pins"></g>
         </svg>
 
         <div class="map-tip" id="map-tip" role="tooltip" aria-hidden="true"></div>
       </div>
 
+      <ul class="map-keys" aria-label="Légende des points">
+        <li><span class="key-dot key-home"></span>Notre QG</li>
+        <li><span class="key-dot key-visited"></span>Déjà visité</li>
+        <li><span class="key-dot key-upcoming"></span>À venir</li>
+        <li><span class="key-dot key-wish"></span>Sur notre liste</li>
+      </ul>
       <ul class="map-legend" id="map-legend"><!-- généré par script.js (PLACES) --></ul>
-      <p class="map-note">Carte stylisée, pas à l'échelle.</p>
+      <p class="map-note">Carte stylisée, pas à l'échelle. Distances à vol d'oiseau depuis Troyes.</p>
     </section>
 
     <!-- ================================================================
@@ -310,21 +309,29 @@
 
       <div class="section-head">
         <h2>Cinéma &amp; séries</h2>
-        <p>Clique sur le statut d'un ticket pour le faire évoluer : à voir ensemble, en cours, vu.</p>
+        <p>Clique sur le statut d'un ticket pour le faire évoluer (à voir ensemble, en cours, vu), puis notez ce que vous avez vu.</p>
       </div>
       <p class="cinema-summary" id="cinema-summary" aria-live="polite"></p>
+      <div class="cinema-toolbar">
+        <div class="chip-row" id="cinema-filters" role="group" aria-label="Filtrer par statut"><!-- généré par script.js --></div>
+        <button class="btn btn-primary btn-small" id="cinema-pick" type="button">
+          <svg class="ico" aria-hidden="true"><use href="#i-dice"></use></svg> Ce soir on regarde…</button>
+      </div>
       <div class="cinema-list" id="cinema-list"><!-- généré par script.js (DATA.cinema) --></div>
 
       <div class="section-head section-head--music">
         <h2>Musique &amp; vibes</h2>
-        <p>Un lecteur à vinyle pour l'ambiance. Sans fichier dans <code>audio/</code>, il tourne en mode démo.</p>
+        <p>Notre playlist sur une platine vinyle. Dépose les MP3 dans <code>audio/</code> pour une vraie lecture ; sinon, le lecteur tourne en mode démo.</p>
       </div>
 
       <!-- Lecteur façon platine vinyle -->
       <div class="player" id="player">
         <div class="vinyl-stage">
           <div class="vinyl" id="vinyl">
-            <div class="vinyl-label"><span id="vinyl-initial">♪</span></div>
+            <div class="vinyl-label" id="vinyl-label">
+              <span class="vinyl-cover" id="vinyl-cover" aria-hidden="true"></span>
+              <span class="vinyl-initial" id="vinyl-initial">♪</span>
+            </div>
           </div>
           <div class="tonearm" id="tonearm" aria-hidden="true"></div>
         </div>
@@ -341,14 +348,21 @@
           <div class="player-time"><span id="t-cur">0:00</span><span id="t-dur">0:00</span></div>
 
           <div class="controls">
+            <button class="ctl ctl-mini" id="btn-shuffle" type="button" aria-pressed="false" aria-label="Lecture aléatoire">
+              <svg class="ico" aria-hidden="true"><use href="#i-shuffle"></use></svg></button>
             <button class="ctl" id="btn-prev" type="button" aria-label="Morceau précédent">
               <svg class="ico" aria-hidden="true"><use href="#i-prev"></use></svg></button>
             <button class="ctl ctl-play" id="btn-play" type="button" aria-label="Lecture" aria-pressed="false">
               <svg class="ico" id="btn-play-ico" aria-hidden="true"><use href="#i-play"></use></svg></button>
             <button class="ctl" id="btn-next" type="button" aria-label="Morceau suivant">
               <svg class="ico" aria-hidden="true"><use href="#i-next"></use></svg></button>
+            <button class="ctl ctl-mini" id="btn-repeat" type="button" aria-pressed="false" aria-label="Répéter le morceau">
+              <svg class="ico" aria-hidden="true"><use href="#i-repeat"></use></svg><span class="ctl-badge" aria-hidden="true">1</span></button>
           </div>
         </div>
+
+        <!-- Liste de lecture (cliquable) -->
+        <ol class="playlist" id="playlist" aria-label="Notre playlist"><!-- généré par script.js --></ol>
       </div>
 
       <div class="artist-grid" id="artist-grid"><!-- généré par script.js (DATA.artists) --></div>
@@ -366,6 +380,10 @@
       <div class="wheel-filters">
         <div class="chip-row" id="wheel-cats" role="group" aria-label="Catégories d'idées"><!-- généré par script.js --></div>
         <div class="chip-row" id="wheel-budget" role="group" aria-label="Budget maximum"><!-- généré par script.js --></div>
+        <div class="chip-row">
+          <button class="chip chip-toggle" id="wheel-skip-done" type="button" aria-pressed="false">
+            <svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg> Sans les idées déjà faites</button>
+        </div>
       </div>
 
       <div class="wheel-layout">
@@ -400,6 +418,41 @@
           </div>
         </div>
       </div>
+
+      <!-- Idées personnelles (mémorisées dans le navigateur) -->
+      <details class="wheel-custom" id="wheel-custom">
+        <summary>
+          <svg class="ico" aria-hidden="true"><use href="#i-plus"></use></svg>
+          <span>Nos idées perso</span>
+          <small class="wc-count" id="wheel-custom-count"></small>
+        </summary>
+        <form class="custom-form" id="custom-form" autocomplete="off">
+          <label class="field field--wide">
+            <span>L'idée</span>
+            <input id="custom-title" type="text" maxlength="60" required placeholder="Ex. : Soirée crêpes et film d'horreur">
+          </label>
+          <label class="field">
+            <span>Catégorie</span>
+            <select id="custom-cat"><!-- généré par script.js --></select>
+          </label>
+          <label class="field">
+            <span>Budget</span>
+            <select id="custom-budget">
+              <option value="0">Gratuit</option>
+              <option value="1">€</option>
+              <option value="2">€€</option>
+              <option value="3">€€€</option>
+            </select>
+          </label>
+          <label class="field field--wide">
+            <span>Détails (facultatif)</span>
+            <input id="custom-text" type="text" maxlength="180" placeholder="Où, quand, ce qu'il faut prévoir…">
+          </label>
+          <button class="btn btn-primary btn-small" type="submit">
+            <svg class="ico" aria-hidden="true"><use href="#i-plus"></use></svg> Ajouter à la roue</button>
+        </form>
+        <ul class="custom-list" id="custom-list"><!-- généré par script.js --></ul>
+      </details>
     </section>
 
     <!-- ================================================================
@@ -408,7 +461,7 @@
     <section class="panel" id="panel-recettes" role="tabpanel" aria-labelledby="tab-recettes" data-panel="recettes" hidden>
       <div class="section-head">
         <h2>Notre livre de recettes</h2>
-        <p>Du croque du dimanche soir au bœuf bourguignon des grandes occasions. Ouvre une fiche, ajuste les parts, coche au fur et à mesure.</p>
+        <p>Du croque du dimanche soir au bœuf bourguignon des grandes occasions. Ouvre une fiche, ajuste les parts, lance les minuteurs et remplis la liste de courses.</p>
       </div>
 
       <div class="recipe-toolbar">
@@ -419,11 +472,14 @@
         </label>
         <button class="chip chip-fav" id="recipe-favs" type="button" aria-pressed="false">
           <svg class="ico" aria-hidden="true"><use href="#i-heart"></use></svg> Favoris</button>
+        <button class="btn btn-ghost btn-small" id="shop-open" type="button">
+          <svg class="ico" aria-hidden="true"><use href="#i-cart"></use></svg> Courses
+          <b class="count-badge" id="shop-count">0</b></button>
         <button class="btn btn-primary btn-small" id="recipe-surprise" type="button">
           <svg class="ico" aria-hidden="true"><use href="#i-dice"></use></svg> Recette surprise</button>
       </div>
       <div class="chip-row" id="recipe-cats" role="group" aria-label="Catégories de recettes"><!-- généré par script.js --></div>
-      <div class="chip-row" id="recipe-levels" role="group" aria-label="Difficulté"><!-- généré par script.js --></div>
+      <div class="chip-row" id="recipe-levels" role="group" aria-label="Difficulté et durée"><!-- généré par script.js --></div>
       <p class="recipe-count" id="recipe-count" aria-live="polite"></p>
       <div class="recipe-grid" id="recipe-grid"><!-- généré par script.js (recettes.js) --></div>
     </section>
@@ -434,7 +490,7 @@
     <section class="panel" id="panel-quiz" role="tabpanel" aria-labelledby="tab-quiz" data-panel="quiz" hidden>
       <div class="section-head">
         <h2>Le quiz de nous deux</h2>
-        <p>Quatre questions sur notre histoire. Chaque bonne réponse lance des confettis.</p>
+        <p>Quelques questions sur notre histoire. Chaque bonne réponse lance des confettis.</p>
       </div>
       <div class="quiz" id="quiz-root"><!-- généré par script.js --></div>
     </section>
@@ -445,9 +501,14 @@
     <p>Fait avec amour · fonctionne hors ligne · <span id="footer-year"></span></p>
     <!-- Compteur d'easter eggs : un clic donne un indice -->
     <p><button class="egg-counter" id="egg-counter" type="button" title="Un indice ?"></button></p>
-    <!-- Crédits des sources d'images en ligne (affiches et pochettes, uniquement si absentes de photos/) -->
-    <p class="footer-credits"><small>Affiches de séries : TVMaze · pochettes et films : iTunes Search API · Wikipédia</small></p>
+    <!-- Crédits des sources d'images en ligne (utilisées uniquement si absentes de photos/) -->
+    <p class="footer-credits"><small>Affiches et pochettes : TVMaze · Allociné · iTunes Search API · Wikipédia</small></p>
   </footer>
+
+  <!-- Bouton « revenir en haut » (affiché après défilement) -->
+  <button class="to-top" id="to-top" type="button" aria-label="Revenir en haut de la page" hidden>
+    <svg class="ico" aria-hidden="true"><use href="#i-up"></use></svg>
+  </button>
 
   <!-- ===================================================================
        MODALE DE LA CARTE
@@ -464,6 +525,7 @@
         <h3 class="modal-title" id="modal-title"></h3>
         <p class="modal-text" id="modal-text"></p>
         <p class="modal-date" id="modal-date"></p>
+        <p class="modal-meta" id="modal-meta"></p>
       </div>
     </div>
   </div>
@@ -480,6 +542,43 @@
       <div class="recipe-sheet" id="recipe-sheet"></div>
     </div>
   </div>
+
+  <!-- ===================================================================
+       MODALE LISTE DE COURSES (remplie par script.js)
+       =================================================================== -->
+  <div class="modal modal--shop" id="shop-modal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="shop-title" tabindex="-1">
+      <button class="modal-close" type="button" data-close aria-label="Fermer la liste de courses">
+        <svg class="ico" aria-hidden="true"><use href="#i-close"></use></svg>
+      </button>
+      <div class="shop-sheet">
+        <p class="sheet-tag">Pour le supermarché</p>
+        <h3 class="sheet-title" id="shop-title">Liste de courses</h3>
+        <p class="shop-hint">Ajoute une recette depuis sa fiche (les quantités suivent le nombre de parts), ou un article à la main.</p>
+        <form class="shop-add" id="shop-add" autocomplete="off">
+          <label class="search-field">
+            <svg class="ico" aria-hidden="true"><use href="#i-plus"></use></svg>
+            <span class="sr-only">Ajouter un article</span>
+            <input id="shop-input" type="text" maxlength="80" placeholder="Ajouter un article…">
+          </label>
+          <button class="btn btn-primary btn-small" type="submit">Ajouter</button>
+        </form>
+        <div class="shop-list" id="shop-list"><!-- généré par script.js --></div>
+        <div class="sheet-actions">
+          <button class="btn btn-ghost btn-small" type="button" id="shop-copy">
+            <svg class="ico" aria-hidden="true"><use href="#i-copy"></use></svg> Copier la liste</button>
+          <button class="btn btn-ghost btn-small" type="button" id="shop-clear-done">
+            <svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg> Retirer les articles cochés</button>
+          <button class="btn btn-ghost btn-small" type="button" id="shop-clear-all">
+            <svg class="ico" aria-hidden="true"><use href="#i-trash"></use></svg> Tout vider</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Minuteurs de cuisine (restent visibles même fiche fermée) -->
+  <div class="timer-dock" id="timer-dock" aria-live="polite" hidden></div>
 
   <!-- Notifications (toasts) -->
   <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
